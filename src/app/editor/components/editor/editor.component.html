@@ -1,0 +1,23 @@
+<div class="control-panel">
+  <div id="componentList" class="component-list">
+    <div class="grid-component">New text component</div>
+  </div>
+</div>
+
+<div id="formParent" class="nodes grid-view drag-container" [class.dragging]="dragging">
+  <ng-container [ngTemplateOutlet]="gridTemplate" [ngTemplateOutletContext]="{nodes: nodes}"></ng-container>
+</div>
+
+
+<ng-template #gridTemplate let-nodes="nodes">
+  <div *ngFor="let node of nodes" class="grid-node" [id]="node.id">
+    <div class="grid-node-content">
+      <div class="type">{{node.component}}</div>
+      <div class="id">{{node.id}}</div>
+      <input [(ngModel)]="node.data.name" type="text" class="label"/>
+    </div>
+    <div class="child-nodes drag-container">
+      <ng-container [ngTemplateOutlet]="gridTemplate" [ngTemplateOutletContext]="{nodes: node.children}"></ng-container>
+    </div>
+  </div>
+</ng-template>

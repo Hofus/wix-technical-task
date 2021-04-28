@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {NodesService} from 'src/app/core/services/nodes.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'wix-technical-task';
+
+  constructor(private nodesService: NodesService) {
+  }
+
+  clearNodes(): void {
+    this.nodesService.nodes.next([]);
+  }
+
 }

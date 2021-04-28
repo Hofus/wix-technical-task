@@ -1,0 +1,8 @@
+<ng-template #nodeTemplate let-node='node' let-depth='depth'>
+ <div>{{getDepthPrefix(depth)}} {{node.data?.name}}</div>
+  <ng-container *ngIf="node?.children">
+    <ng-container *ngFor="let child of node?.children" [ngTemplateOutlet]="nodeTemplate" [ngTemplateOutletContext]="{node:child, depth: depth + 1}"></ng-container>
+  </ng-container>
+</ng-template>
+
+<ng-container *ngFor="let node of nodesService.nodes | async" [ngTemplateOutlet]="nodeTemplate" [ngTemplateOutletContext]="{node:node, depth:1}"></ng-container>
